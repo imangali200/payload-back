@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 
 export const Companies: CollectionConfig = {
-  slug: 'Сompanies',
+  slug: 'companies',
   access: {
     read: () => true,
     create: () => true,

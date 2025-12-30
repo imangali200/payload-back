@@ -70,9 +70,10 @@ export interface Config {
     users: User;
     media: Media;
     hero: Hero;
-    Сompanies: Ompany;
+    companies: Company;
     ourServices: OurService;
     informations: Information;
+    header: Header;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -83,9 +84,10 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
-    Сompanies: OmpaniesSelect<false> | OmpaniesSelect<true>;
+    companies: CompaniesSelect<false> | CompaniesSelect<true>;
     ourServices: OurServicesSelect<false> | OurServicesSelect<true>;
     informations: InformationsSelect<false> | InformationsSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -192,9 +194,9 @@ export interface Hero {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Сompanies".
+ * via the `definition` "companies".
  */
-export interface Ompany {
+export interface Company {
   id: number;
   title: string;
   images?:
@@ -238,6 +240,36 @@ export interface Information {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  logo?: (number | null) | Media;
+  navigations?:
+    | {
+        navigation?: string | null;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  rightSideNavigation?:
+    | {
+        navigations?:
+          | {
+              navigation?: string | null;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        buttonText?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -273,8 +305,8 @@ export interface PayloadLockedDocument {
         value: number | Hero;
       } | null)
     | ({
-        relationTo: 'Сompanies';
-        value: number | Ompany;
+        relationTo: 'companies';
+        value: number | Company;
       } | null)
     | ({
         relationTo: 'ourServices';
@@ -283,6 +315,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'informations';
         value: number | Information;
+      } | null)
+    | ({
+        relationTo: 'header';
+        value: number | Header;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -392,18 +428,18 @@ export interface HeroSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Сompanies_select".
+ * via the `definition` "companies_select".
  */
-export interface OmpaniesSelect {
-  title?: boolean;
+export interface CompaniesSelect<T extends boolean = true> {
+  title?: T;
   images?:
-    | boolean
+    | T
     | {
-        image?: boolean;
-        id?: boolean;
+        image?: T;
+        id?: T;
       };
-  updatedAt?: boolean;
-  createdAt?: boolean;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -430,6 +466,35 @@ export interface InformationsSelect<T extends boolean = true> {
   description?: T;
   img?: T;
   isImageRight?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  navigations?:
+    | T
+    | {
+        navigation?: T;
+        url?: T;
+        id?: T;
+      };
+  rightSideNavigation?:
+    | T
+    | {
+        navigations?:
+          | T
+          | {
+              navigation?: T;
+              url?: T;
+              id?: T;
+            };
+        buttonText?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

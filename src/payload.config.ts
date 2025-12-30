@@ -11,6 +11,7 @@ import {Hero} from './collections/Hero'
 import {Companies} from './collections/Companies'
 import { ourServices } from './collections/ourServices'
 import { informations } from './collections/informations'
+import {header} from './collections/Header'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media,Hero,Companies,ourServices,informations],
+  collections: [Users, Media,Hero,Companies,ourServices,informations,header],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
