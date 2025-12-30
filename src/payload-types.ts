@@ -69,6 +69,10 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    hero: Hero;
+    Сompanies: Ompany;
+    ourServices: OurService;
+    informations: Information;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +82,10 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    hero: HeroSelect<false> | HeroSelect<true>;
+    Сompanies: OmpaniesSelect<false> | OmpaniesSelect<true>;
+    ourServices: OurServicesSelect<false> | OurServicesSelect<true>;
+    informations: InformationsSelect<false> | InformationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -161,6 +169,75 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero".
+ */
+export interface Hero {
+  id: number;
+  title: string;
+  description: string;
+  img?: (number | null) | Media;
+  buttonText?: string | null;
+  statistics?: {
+    start?: number | null;
+    reviewsNumber?: string | null;
+    images?:
+      | {
+          img?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Сompanies".
+ */
+export interface Ompany {
+  id: number;
+  title: string;
+  images?:
+    | {
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ourServices".
+ */
+export interface OurService {
+  id: number;
+  title: string;
+  services?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "informations".
+ */
+export interface Information {
+  id: number;
+  title: string;
+  description: string;
+  img?: (number | null) | Media;
+  isImageRight?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -190,6 +267,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'hero';
+        value: number | Hero;
+      } | null)
+    | ({
+        relationTo: 'Сompanies';
+        value: number | Ompany;
+      } | null)
+    | ({
+        relationTo: 'ourServices';
+        value: number | OurService;
+      } | null)
+    | ({
+        relationTo: 'informations';
+        value: number | Information;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -272,6 +365,73 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  img?: T;
+  buttonText?: T;
+  statistics?:
+    | T
+    | {
+        start?: T;
+        reviewsNumber?: T;
+        images?:
+          | T
+          | {
+              img?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Сompanies_select".
+ */
+export interface OmpaniesSelect {
+  title?: boolean;
+  images?:
+    | boolean
+    | {
+        image?: boolean;
+        id?: boolean;
+      };
+  updatedAt?: boolean;
+  createdAt?: boolean;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ourServices_select".
+ */
+export interface OurServicesSelect<T extends boolean = true> {
+  title?: T;
+  services?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "informations_select".
+ */
+export interface InformationsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  img?: T;
+  isImageRight?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
